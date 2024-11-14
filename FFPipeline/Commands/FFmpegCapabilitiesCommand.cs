@@ -15,8 +15,8 @@ public class FFmpegCapabilitiesCommand
     [Command("ffmpeg-capabilities")]
     public virtual async Task Run(CancellationToken cancellationToken)
     {
-        var maybeInput = await GetInput(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
+        var maybeRequest = await GetRequest(cancellationToken);
+        var maybeCapabilities = await GetFFmpegCapabilities(maybeRequest);
         foreach (var ffmpegCapabilities in maybeCapabilities)
         {
             var modelJson = JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default);
@@ -29,30 +29,29 @@ public class FFmpegCapabilitiesCommand
         }
     }
 
-    protected async Task<Option<CapabilitiesInput>> GetInput(CancellationToken cancellationToken)
+    protected async Task<Option<CapabilitiesRequest>> GetRequest(CancellationToken cancellationToken)
     {
         if (Console.IsInputRedirected)
         {
             var json = await Console.In.ReadToEndAsync(cancellationToken);
-            var capabilitiesInput = JsonExtensions.Deserialize<CapabilitiesInput>(json, SourceGenerationContext.Default);
-            if (capabilitiesInput != null)
+            var capabilitiesRequest = JsonExtensions.Deserialize<CapabilitiesRequest>(json, SourceGenerationContext.Default);
+            if (capabilitiesRequest != null)
             {
-                return capabilitiesInput;
+                return capabilitiesRequest;
             }
         }
 
-        return Option<CapabilitiesInput>.None;
+        return Option<CapabilitiesRequest>.None;
     }
 
     protected async Task<Option<IFFmpegCapabilities>> GetFFmpegCapabilities(
-        Option<CapabilitiesInput> maybeInput,
-        CancellationToken cancellationToken)
+        Option<CapabilitiesRequest> maybeRequest)
     {
-        foreach (var input in maybeInput)
+        foreach (var request in maybeRequest)
         {
-            if (!string.IsNullOrEmpty(input.FFmpegPath) && File.Exists(input.FFmpegPath))
+            if (!string.IsNullOrEmpty(request.FFmpegPath) && File.Exists(request.FFmpegPath))
             {
-                return Some(await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(input.FFmpegPath));
+                return Some(await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(request.FFmpegPath));
             }
         }
 
