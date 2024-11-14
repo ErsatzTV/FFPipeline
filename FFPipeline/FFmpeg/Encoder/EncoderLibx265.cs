@@ -1,7 +1,7 @@
-﻿using ErsatzTV.FFmpeg.Filter;
-using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Filter;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder;
+namespace FFPipeline.FFmpeg.Encoder;
 
 public class EncoderLibx265(FrameState currentState, Option<string> maybeVideoPreset) : EncoderBase
 {

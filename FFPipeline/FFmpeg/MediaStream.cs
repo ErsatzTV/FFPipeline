@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 [SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix")]
 public record MediaStream(int Index, string Codec, StreamKind Kind);

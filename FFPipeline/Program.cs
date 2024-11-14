@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using ConsoleAppFramework;
-using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Runtime;
+using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Runtime;
 using FFPipeline.Commands;
 using FFPipeline.Models;
 using Microsoft.Extensions.Caching.Memory;

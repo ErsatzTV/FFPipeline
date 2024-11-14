@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Encoder;
+﻿namespace FFPipeline.FFmpeg.Encoder;
 
 public class EncoderAac : EncoderBase
 {

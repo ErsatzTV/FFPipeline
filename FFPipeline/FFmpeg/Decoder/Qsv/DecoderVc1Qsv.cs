@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Decoder.Qsv;
+﻿namespace FFPipeline.FFmpeg.Decoder.Qsv;
 
 public class DecoderVc1Qsv : DecoderBase
 {

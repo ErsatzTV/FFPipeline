@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.Protocol;
+namespace FFPipeline.FFmpeg.Protocol;
 
 public class PipeProtocol : IPipelineStep
 {

@@ -1,8 +1,8 @@
-﻿using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.InputOption;
-using ErsatzTV.FFmpeg.State;
+﻿using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.InputOption;
+using FFPipeline.FFmpeg.State;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 public abstract record InputFile(string Path, IList<MediaStream> Streams)
 {

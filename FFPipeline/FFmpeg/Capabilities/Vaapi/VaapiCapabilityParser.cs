@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace ErsatzTV.FFmpeg.Capabilities.Vaapi;
+namespace FFPipeline.FFmpeg.Capabilities.Vaapi;
 
 public static class VaapiCapabilityParser
 {

@@ -1,4 +1,4 @@
-namespace ErsatzTV.FFmpeg.Pipeline;
+namespace FFPipeline.FFmpeg.Pipeline;
 
 public record PipelineContext(
     HardwareAccelerationMode HardwareAccelerationMode,

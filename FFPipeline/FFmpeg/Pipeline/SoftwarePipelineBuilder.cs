@@ -1,14 +1,14 @@
-using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Decoder;
-using ErsatzTV.FFmpeg.Encoder;
-using ErsatzTV.FFmpeg.Filter;
-using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.InputOption;
-using ErsatzTV.FFmpeg.OutputOption;
-using ErsatzTV.FFmpeg.State;
+using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Decoder;
+using FFPipeline.FFmpeg.Encoder;
+using FFPipeline.FFmpeg.Filter;
+using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.InputOption;
+using FFPipeline.FFmpeg.OutputOption;
+using FFPipeline.FFmpeg.State;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Pipeline;
+namespace FFPipeline.FFmpeg.Pipeline;
 
 public class SoftwarePipelineBuilder : PipelineBuilderBase
 {

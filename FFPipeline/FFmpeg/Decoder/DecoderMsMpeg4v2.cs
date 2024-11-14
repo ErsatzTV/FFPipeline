@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Decoder;
+﻿namespace FFPipeline.FFmpeg.Decoder;
 
 public class DecoderMsMpeg4V2 : DecoderBase
 {

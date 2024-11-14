@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.Filter;
+namespace FFPipeline.FFmpeg.Filter;
 
 public class VideoFilter : IPipelineStep
 {

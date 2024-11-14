@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 [SuppressMessage("ReSharper", "IdentifierTypo")]
 [SuppressMessage("ReSharper", "StringLiteralTypo")]

@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.GlobalOption;
+﻿namespace FFPipeline.FFmpeg.GlobalOption;
 
 public class HideBannerOption : GlobalOption
 {

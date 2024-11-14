@@ -1,4 +1,4 @@
-using ErsatzTV.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Capabilities;
 using ConsoleAppFramework;
 
 namespace FFPipeline.Commands;

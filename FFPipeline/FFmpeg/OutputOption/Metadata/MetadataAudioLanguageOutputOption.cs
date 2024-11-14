@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.OutputOption.Metadata;
+﻿namespace FFPipeline.FFmpeg.OutputOption.Metadata;
 
 public class MetadataAudioLanguageOutputOption : OutputOption
 {

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public enum RateControlMode

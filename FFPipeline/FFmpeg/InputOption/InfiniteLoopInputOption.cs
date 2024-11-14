@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.InputOption;
+namespace FFPipeline.FFmpeg.InputOption;
 
 public class InfiniteLoopInputOption : IInputOption
 {

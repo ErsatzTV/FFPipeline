@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Filter.Qsv;
+namespace FFPipeline.FFmpeg.Filter.Qsv;
 
 public class SubtitleScaleQsvFilter : BaseFilter
 {

@@ -1,4 +1,4 @@
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public record FFmpegKnownEncoder
 {

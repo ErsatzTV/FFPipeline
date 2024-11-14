@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Filter;
+﻿namespace FFPipeline.FFmpeg.Filter;
 
 public class HardwareUploadFilter : BaseFilter
 {

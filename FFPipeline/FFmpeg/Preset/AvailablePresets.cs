@@ -1,6 +1,6 @@
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Preset;
+namespace FFPipeline.FFmpeg.Preset;
 
 public static class AvailablePresets
 {

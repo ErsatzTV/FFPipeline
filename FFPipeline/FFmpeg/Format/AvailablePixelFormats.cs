@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Format;
+namespace FFPipeline.FFmpeg.Format;
 
 public static class AvailablePixelFormats
 {

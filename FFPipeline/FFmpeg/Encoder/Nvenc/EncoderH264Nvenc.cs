@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.Nvenc;
+namespace FFPipeline.FFmpeg.Encoder.Nvenc;
 
 public class EncoderH264Nvenc(Option<string> maybeVideoProfile, Option<string> maybeVideoPreset) : EncoderBase
 {

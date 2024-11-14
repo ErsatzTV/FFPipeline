@@ -1,4 +1,4 @@
-namespace ErsatzTV.FFmpeg.Capabilities.Vaapi;
+namespace FFPipeline.FFmpeg.Capabilities.Vaapi;
 
 public class VaapiProfile
 {

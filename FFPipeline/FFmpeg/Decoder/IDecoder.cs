@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.InputOption;
+﻿using FFPipeline.FFmpeg.InputOption;
 
-namespace ErsatzTV.FFmpeg.Decoder;
+namespace FFPipeline.FFmpeg.Decoder;
 
 public interface IDecoder : IInputOption
 {

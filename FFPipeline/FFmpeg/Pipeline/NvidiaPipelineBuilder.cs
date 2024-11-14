@@ -1,19 +1,19 @@
-using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Decoder;
-using ErsatzTV.FFmpeg.Decoder.Cuvid;
-using ErsatzTV.FFmpeg.Encoder;
-using ErsatzTV.FFmpeg.Encoder.Nvenc;
-using ErsatzTV.FFmpeg.Filter;
-using ErsatzTV.FFmpeg.Filter.Cuda;
-using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.GlobalOption.HardwareAcceleration;
-using ErsatzTV.FFmpeg.InputOption;
-using ErsatzTV.FFmpeg.OutputFormat;
-using ErsatzTV.FFmpeg.OutputOption;
-using ErsatzTV.FFmpeg.State;
+using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Decoder;
+using FFPipeline.FFmpeg.Decoder.Cuvid;
+using FFPipeline.FFmpeg.Encoder;
+using FFPipeline.FFmpeg.Encoder.Nvenc;
+using FFPipeline.FFmpeg.Filter;
+using FFPipeline.FFmpeg.Filter.Cuda;
+using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.GlobalOption.HardwareAcceleration;
+using FFPipeline.FFmpeg.InputOption;
+using FFPipeline.FFmpeg.OutputFormat;
+using FFPipeline.FFmpeg.OutputOption;
+using FFPipeline.FFmpeg.State;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Pipeline;
+namespace FFPipeline.FFmpeg.Pipeline;
 
 public class NvidiaPipelineBuilder : SoftwarePipelineBuilder
 {

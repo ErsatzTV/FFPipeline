@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.OutputFormat;
+﻿using FFPipeline.FFmpeg.OutputFormat;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 public record FFmpegState(
     bool SaveReport,
@@ -35,7 +35,7 @@ public record FFmpegState(
             Option<TimeSpan>.None,
             Option<TimeSpan>.None,
             true, // do not map metadata
-            "ErsatzTV",
+            "FFPipeline",
             channelName,
             Option<string>.None,
             Option<string>.None,

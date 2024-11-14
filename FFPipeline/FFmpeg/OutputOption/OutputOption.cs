@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.OutputOption;
+namespace FFPipeline.FFmpeg.OutputOption;
 
 public abstract class OutputOption : IPipelineStep
 {

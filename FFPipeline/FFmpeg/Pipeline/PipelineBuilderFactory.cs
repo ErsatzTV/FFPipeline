@@ -1,7 +1,7 @@
-using ErsatzTV.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Capabilities;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Pipeline;
+namespace FFPipeline.FFmpeg.Pipeline;
 
 public class PipelineBuilderFactory : IPipelineBuilderFactory
 {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace ErsatzTV.FFmpeg.Filter;
+namespace FFPipeline.FFmpeg.Filter;
 
 public class SubtitlesFilter : BaseFilter
 {

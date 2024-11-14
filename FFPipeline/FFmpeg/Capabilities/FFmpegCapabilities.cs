@@ -1,8 +1,8 @@
-using ErsatzTV.FFmpeg.Decoder;
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Decoder;
+using FFPipeline.FFmpeg.Format;
 using FFPipeline.Models;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public class FFmpegCapabilities : IFFmpegCapabilities
 {

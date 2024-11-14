@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Filter.Cuda;
+namespace FFPipeline.FFmpeg.Filter.Cuda;
 
 public class ScaleCudaFilter : BaseFilter
 {

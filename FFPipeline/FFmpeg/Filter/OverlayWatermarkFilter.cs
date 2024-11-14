@@ -1,8 +1,8 @@
-﻿using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.State;
+﻿using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.State;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Filter;
+namespace FFPipeline.FFmpeg.Filter;
 
 public class OverlayWatermarkFilter : BaseFilter
 {

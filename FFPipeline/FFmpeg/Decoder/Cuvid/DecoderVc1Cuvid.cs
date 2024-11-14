@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Decoder.Cuvid;
+﻿namespace FFPipeline.FFmpeg.Decoder.Cuvid;
 
 public class DecoderVc1Cuvid : CuvidDecoder
 {

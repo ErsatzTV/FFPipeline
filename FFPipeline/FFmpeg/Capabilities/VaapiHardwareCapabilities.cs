@@ -1,8 +1,8 @@
-using ErsatzTV.FFmpeg.Capabilities.Vaapi;
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Capabilities.Vaapi;
+using FFPipeline.FFmpeg.Format;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public class VaapiHardwareCapabilities : IHardwareCapabilities
 {

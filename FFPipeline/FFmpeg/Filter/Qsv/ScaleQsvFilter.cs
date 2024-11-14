@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Filter.Qsv;
+namespace FFPipeline.FFmpeg.Filter.Qsv;
 
 public class ScaleQsvFilter : BaseFilter
 {
@@ -34,7 +34,7 @@ public class ScaleQsvFilter : BaseFilter
     {
         get
         {
-            // use vpp_qsv because scale_qsv sometimes causes green lines at the bottom 
+            // use vpp_qsv because scale_qsv sometimes causes green lines at the bottom
 
             string scale = string.Empty;
 

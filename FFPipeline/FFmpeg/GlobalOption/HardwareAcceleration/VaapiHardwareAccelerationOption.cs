@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Capabilities;
+﻿using FFPipeline.FFmpeg.Capabilities;
 
-namespace ErsatzTV.FFmpeg.GlobalOption.HardwareAcceleration;
+namespace FFPipeline.FFmpeg.GlobalOption.HardwareAcceleration;
 
 public class VaapiHardwareAccelerationOption : GlobalOption
 {

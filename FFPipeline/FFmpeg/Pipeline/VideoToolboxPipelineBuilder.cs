@@ -1,14 +1,14 @@
-using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Decoder;
-using ErsatzTV.FFmpeg.Encoder;
-using ErsatzTV.FFmpeg.Encoder.VideoToolbox;
-using ErsatzTV.FFmpeg.Filter;
-using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.GlobalOption.HardwareAcceleration;
-using ErsatzTV.FFmpeg.OutputOption;
+using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Decoder;
+using FFPipeline.FFmpeg.Encoder;
+using FFPipeline.FFmpeg.Encoder.VideoToolbox;
+using FFPipeline.FFmpeg.Filter;
+using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.GlobalOption.HardwareAcceleration;
+using FFPipeline.FFmpeg.OutputOption;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Pipeline;
+namespace FFPipeline.FFmpeg.Pipeline;
 
 public class VideoToolboxPipelineBuilder : SoftwarePipelineBuilder
 {

@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.Encoder;
+namespace FFPipeline.FFmpeg.Encoder;
 
 public abstract class EncoderBase : IEncoder
 {

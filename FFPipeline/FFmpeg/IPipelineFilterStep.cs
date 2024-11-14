@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg;
+﻿namespace FFPipeline.FFmpeg;
 
 public interface IPipelineFilterStep : IPipelineStep
 {

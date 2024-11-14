@@ -1,6 +1,6 @@
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public class DefaultHardwareCapabilities : IHardwareCapabilities
 {

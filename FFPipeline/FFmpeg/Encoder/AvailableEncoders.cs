@@ -1,9 +1,9 @@
-﻿using ErsatzTV.FFmpeg.Format;
-using ErsatzTV.FFmpeg.OutputFormat;
-using ErsatzTV.FFmpeg.State;
+﻿using FFPipeline.FFmpeg.Format;
+using FFPipeline.FFmpeg.OutputFormat;
+using FFPipeline.FFmpeg.State;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Encoder;
+namespace FFPipeline.FFmpeg.Encoder;
 
 public static class AvailableEncoders
 {

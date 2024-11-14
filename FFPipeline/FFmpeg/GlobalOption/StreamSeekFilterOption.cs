@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Environment;
+﻿using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.GlobalOption;
+namespace FFPipeline.FFmpeg.GlobalOption;
 
 public class StreamSeekFilterOption : IPipelineStep
 {

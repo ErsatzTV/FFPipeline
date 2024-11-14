@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 public record FrameState(
     bool Realtime,

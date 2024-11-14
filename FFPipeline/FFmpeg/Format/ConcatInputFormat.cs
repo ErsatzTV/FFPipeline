@@ -1,7 +1,7 @@
-﻿using ErsatzTV.FFmpeg.Environment;
-using ErsatzTV.FFmpeg.InputOption;
+﻿using FFPipeline.FFmpeg.Environment;
+using FFPipeline.FFmpeg.InputOption;
 
-namespace ErsatzTV.FFmpeg.Format;
+namespace FFPipeline.FFmpeg.Format;
 
 public class ConcatInputFormat : IInputOption
 {

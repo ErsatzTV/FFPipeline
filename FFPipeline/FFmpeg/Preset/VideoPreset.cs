@@ -1,4 +1,4 @@
-namespace ErsatzTV.FFmpeg.Preset;
+namespace FFPipeline.FFmpeg.Preset;
 
 public static class VideoPreset
 {

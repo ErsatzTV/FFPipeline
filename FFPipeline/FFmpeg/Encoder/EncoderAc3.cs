@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Encoder;
+﻿namespace FFPipeline.FFmpeg.Encoder;
 
 public class EncoderAc3 : EncoderBase
 {

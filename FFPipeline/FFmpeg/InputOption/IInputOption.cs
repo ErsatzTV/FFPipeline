@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.InputOption;
+﻿namespace FFPipeline.FFmpeg.InputOption;
 
 public interface IInputOption : IPipelineStep
 {

@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.GlobalOption.HardwareAcceleration;
+namespace FFPipeline.FFmpeg.GlobalOption.HardwareAcceleration;
 
 public class QsvHardwareAccelerationOption : GlobalOption
 {

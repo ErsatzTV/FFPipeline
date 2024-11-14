@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Filter.Vaapi;
+namespace FFPipeline.FFmpeg.Filter.Vaapi;
 
 public class ScaleVaapiFilter : BaseFilter
 {

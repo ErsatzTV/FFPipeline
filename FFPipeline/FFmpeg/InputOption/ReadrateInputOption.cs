@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
-using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Environment;
+using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Environment;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.InputOption;
+namespace FFPipeline.FFmpeg.InputOption;
 
 public class ReadrateInputOption : IInputOption
 {

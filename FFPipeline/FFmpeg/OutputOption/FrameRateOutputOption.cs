@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using ErsatzTV.FFmpeg.Environment;
+using FFPipeline.FFmpeg.Environment;
 
-namespace ErsatzTV.FFmpeg.OutputOption;
+namespace FFPipeline.FFmpeg.OutputOption;
 
 public class FrameRateOutputOption : IPipelineStep
 {

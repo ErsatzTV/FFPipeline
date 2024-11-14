@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.OutputOption;
+﻿namespace FFPipeline.FFmpeg.OutputOption;
 
 public class FastStartOutputOption : OutputOption
 {

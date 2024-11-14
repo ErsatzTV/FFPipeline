@@ -1,10 +1,10 @@
-﻿using ErsatzTV.FFmpeg.Encoder;
-using ErsatzTV.FFmpeg.Environment;
-using ErsatzTV.FFmpeg.Filter;
-using ErsatzTV.FFmpeg.GlobalOption;
-using ErsatzTV.FFmpeg.InputOption;
+﻿using FFPipeline.FFmpeg.Encoder;
+using FFPipeline.FFmpeg.Environment;
+using FFPipeline.FFmpeg.Filter;
+using FFPipeline.FFmpeg.GlobalOption;
+using FFPipeline.FFmpeg.InputOption;
 
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 public static class CommandGenerator
 {

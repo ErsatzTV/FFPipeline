@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Decoder.Qsv;
+namespace FFPipeline.FFmpeg.Decoder.Qsv;
 
 public class DecoderVp9Qsv : DecoderBase
 {

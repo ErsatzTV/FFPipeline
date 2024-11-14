@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.State;
+﻿using FFPipeline.FFmpeg.State;
 
-namespace ErsatzTV.FFmpeg.Filter;
+namespace FFPipeline.FFmpeg.Filter;
 
 public class WatermarkPixelFormatFilter : BaseFilter
 {

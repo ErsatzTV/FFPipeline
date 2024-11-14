@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Filter.Qsv;
+﻿namespace FFPipeline.FFmpeg.Filter.Qsv;
 
 public class OverlaySubtitleQsvFilter : BaseFilter
 {

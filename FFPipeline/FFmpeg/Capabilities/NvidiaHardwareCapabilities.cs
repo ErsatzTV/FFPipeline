@@ -1,7 +1,7 @@
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Format;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public class NvidiaHardwareCapabilities : IHardwareCapabilities
 {

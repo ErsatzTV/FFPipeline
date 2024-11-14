@@ -5,14 +5,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using CliWrap;
 using CliWrap.Buffered;
-using ErsatzTV.FFmpeg.Capabilities.Qsv;
-using ErsatzTV.FFmpeg.Capabilities.Vaapi;
-using ErsatzTV.FFmpeg.GlobalOption.HardwareAcceleration;
-using ErsatzTV.FFmpeg.Runtime;
+using FFPipeline.FFmpeg.Capabilities.Qsv;
+using FFPipeline.FFmpeg.Capabilities.Vaapi;
+using FFPipeline.FFmpeg.GlobalOption.HardwareAcceleration;
+using FFPipeline.FFmpeg.Runtime;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public class HardwareCapabilitiesFactory : IHardwareCapabilitiesFactory
 {

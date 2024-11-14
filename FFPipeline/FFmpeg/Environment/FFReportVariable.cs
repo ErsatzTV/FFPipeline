@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace ErsatzTV.FFmpeg.Environment;
+namespace FFPipeline.FFmpeg.Environment;
 
 public class FFReportVariable : IPipelineStep
 {

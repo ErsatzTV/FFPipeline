@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace ErsatzTV.FFmpeg.Runtime;
+namespace FFPipeline.FFmpeg.Runtime;
 
 public class RuntimeInfo : IRuntimeInfo
 {

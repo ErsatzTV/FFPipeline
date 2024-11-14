@@ -1,7 +1,7 @@
-﻿using ErsatzTV.FFmpeg.Environment;
-using ErsatzTV.FFmpeg.Pipeline;
+﻿using FFPipeline.FFmpeg.Environment;
+using FFPipeline.FFmpeg.Pipeline;
 
-namespace ErsatzTV.FFmpeg.Filter;
+namespace FFPipeline.FFmpeg.Filter;
 
 public class ComplexFilter : IPipelineStep
 {

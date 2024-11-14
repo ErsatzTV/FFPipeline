@@ -1,7 +1,7 @@
-﻿using ErsatzTV.FFmpeg.Capabilities;
-using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Capabilities;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.Nvenc;
+namespace FFPipeline.FFmpeg.Encoder.Nvenc;
 
 public class EncoderHevcNvenc : EncoderBase
 {

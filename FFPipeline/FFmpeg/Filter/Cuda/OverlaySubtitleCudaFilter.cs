@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Filter.Cuda;
+﻿namespace FFPipeline.FFmpeg.Filter.Cuda;
 
 public class OverlaySubtitleCudaFilter : BaseFilter
 {

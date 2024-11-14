@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Format;
+﻿namespace FFPipeline.FFmpeg.Format;
 
 public class PixelFormatP010 : IPixelFormat
 {

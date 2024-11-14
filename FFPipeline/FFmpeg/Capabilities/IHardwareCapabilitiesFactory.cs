@@ -1,6 +1,6 @@
-using ErsatzTV.FFmpeg.Capabilities.Qsv;
+using FFPipeline.FFmpeg.Capabilities.Qsv;
 
-namespace ErsatzTV.FFmpeg.Capabilities;
+namespace FFPipeline.FFmpeg.Capabilities;
 
 public interface IHardwareCapabilitiesFactory
 {

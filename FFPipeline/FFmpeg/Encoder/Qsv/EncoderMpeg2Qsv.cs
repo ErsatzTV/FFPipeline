@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.Qsv;
+namespace FFPipeline.FFmpeg.Encoder.Qsv;
 
 public class EncoderMpeg2Qsv : EncoderBase
 {

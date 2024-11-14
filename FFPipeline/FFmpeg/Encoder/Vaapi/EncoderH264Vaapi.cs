@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.Vaapi;
+namespace FFPipeline.FFmpeg.Encoder.Vaapi;
 
 public class EncoderH264Vaapi(Option<string> maybeVideoProfile, RateControlMode rateControlMode) : EncoderBase
 {

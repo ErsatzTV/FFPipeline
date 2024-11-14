@@ -1,3 +1,3 @@
-﻿namespace ErsatzTV.FFmpeg;
+﻿namespace FFPipeline.FFmpeg;
 
 public record FFmpegPipeline(IList<IPipelineStep> PipelineSteps, bool IsIntelVaapiOrQsv);

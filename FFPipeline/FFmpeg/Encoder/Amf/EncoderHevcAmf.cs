@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.Amf;
+namespace FFPipeline.FFmpeg.Encoder.Amf;
 
 public class EncoderHevcAmf : EncoderBase
 {

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace ErsatzTV.FFmpeg.GlobalOption;
+namespace FFPipeline.FFmpeg.GlobalOption;
 
 public class ThreadCountOption : GlobalOption
 {

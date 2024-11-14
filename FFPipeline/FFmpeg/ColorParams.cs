@@ -1,4 +1,4 @@
-namespace ErsatzTV.FFmpeg;
+namespace FFPipeline.FFmpeg;
 
 public record ColorParams(string ColorRange, string ColorSpace, string ColorTransfer, string ColorPrimaries)
 {

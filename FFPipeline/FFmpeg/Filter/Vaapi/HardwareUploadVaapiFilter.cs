@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Filter.Vaapi;
+﻿namespace FFPipeline.FFmpeg.Filter.Vaapi;
 
 public class HardwareUploadVaapiFilter : BaseFilter
 {

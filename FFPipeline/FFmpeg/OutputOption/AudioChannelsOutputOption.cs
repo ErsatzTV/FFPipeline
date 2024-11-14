@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using ErsatzTV.FFmpeg.Format;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.OutputOption;
+namespace FFPipeline.FFmpeg.OutputOption;
 
 public class AudioChannelsOutputOption : OutputOption
 {

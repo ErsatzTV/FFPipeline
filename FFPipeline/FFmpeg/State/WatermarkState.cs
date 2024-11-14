@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.State;
+﻿namespace FFPipeline.FFmpeg.State;
 
 public record WatermarkState(
     Option<List<WatermarkFadePoint>> MaybeFadePoints,

@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.Format;
+﻿namespace FFPipeline.FFmpeg.Format;
 
 public class PixelFormatYuv444P10Le : IPixelFormat
 {

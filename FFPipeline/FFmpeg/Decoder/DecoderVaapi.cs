@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Decoder;
+namespace FFPipeline.FFmpeg.Decoder;
 
 public class DecoderVaapi : DecoderBase
 {

@@ -1,4 +1,4 @@
-﻿namespace ErsatzTV.FFmpeg.OutputFormat;
+﻿namespace FFPipeline.FFmpeg.OutputFormat;
 
 public enum OutputFormatKind
 {

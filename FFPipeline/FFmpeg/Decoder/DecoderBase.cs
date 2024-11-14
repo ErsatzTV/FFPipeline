@@ -1,7 +1,7 @@
-﻿using ErsatzTV.FFmpeg.Environment;
-using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Environment;
+using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Decoder;
+namespace FFPipeline.FFmpeg.Decoder;
 
 public abstract class DecoderBase : IDecoder
 {

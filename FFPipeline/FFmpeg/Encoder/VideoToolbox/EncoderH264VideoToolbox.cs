@@ -1,6 +1,6 @@
-﻿using ErsatzTV.FFmpeg.Format;
+﻿using FFPipeline.FFmpeg.Format;
 
-namespace ErsatzTV.FFmpeg.Encoder.VideoToolbox;
+namespace FFPipeline.FFmpeg.Encoder.VideoToolbox;
 
 public class EncoderH264VideoToolbox(Option<string> maybeVideoProfile) : EncoderBase
 {
