@@ -71,6 +71,7 @@ public class HardwareCapabilitiesFactory : IHardwareCapabilitiesFactory
             .Map(set => set.Intersect(FFmpegKnownOption.AllOptions).ToImmutableHashSet());
 
         return new FFmpegCapabilities(
+            ffmpegPath,
             ffmpegHardwareAccelerations,
             ffmpegDecoders,
             ffmpegFilters,
@@ -80,7 +81,6 @@ public class HardwareCapabilitiesFactory : IHardwareCapabilitiesFactory
 
     public async Task<IHardwareCapabilities> GetHardwareCapabilities(
         IFFmpegCapabilities ffmpegCapabilities,
-        string ffmpegPath,
         HardwareAccelerationMode hardwareAccelerationMode,
         Option<string> vaapiDriver,
         Option<string> vaapiDevice)
@@ -101,8 +101,8 @@ public class HardwareCapabilitiesFactory : IHardwareCapabilitiesFactory
 
         return hardwareAccelerationMode switch
         {
-            HardwareAccelerationMode.Nvenc => await GetNvidiaCapabilities(ffmpegPath, ffmpegCapabilities),
-            HardwareAccelerationMode.Qsv => await GetQsvCapabilities(ffmpegPath, vaapiDevice),
+            HardwareAccelerationMode.Nvenc => await GetNvidiaCapabilities(ffmpegCapabilities.FFmpegPath, ffmpegCapabilities),
+            HardwareAccelerationMode.Qsv => await GetQsvCapabilities(ffmpegCapabilities.FFmpegPath, vaapiDevice),
             HardwareAccelerationMode.Vaapi => await GetVaapiCapabilities(vaapiDriver, vaapiDevice),
             HardwareAccelerationMode.Amf => new AmfHardwareCapabilities(),
             _ => new DefaultHardwareCapabilities()

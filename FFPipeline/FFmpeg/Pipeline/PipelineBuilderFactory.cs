@@ -33,7 +33,6 @@ public class PipelineBuilderFactory : IPipelineBuilderFactory
 
         IHardwareCapabilities capabilities = await _hardwareCapabilitiesFactory.GetHardwareCapabilities(
             ffmpegCapabilities,
-            ffmpegPath,
             hardwareAccelerationMode,
             vaapiDriver,
             vaapiDevice);

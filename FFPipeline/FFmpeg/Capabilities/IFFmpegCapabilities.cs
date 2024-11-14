@@ -5,6 +5,7 @@ namespace FFPipeline.FFmpeg.Capabilities;
 
 public interface IFFmpegCapabilities
 {
+    string FFmpegPath { get; }
     bool HasHardwareAcceleration(HardwareAccelerationMode hardwareAccelerationMode);
     bool HasDecoder(FFmpegKnownDecoder decoder);
     bool HasEncoder(FFmpegKnownEncoder encoder);

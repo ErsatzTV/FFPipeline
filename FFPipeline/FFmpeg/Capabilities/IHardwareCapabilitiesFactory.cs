@@ -8,7 +8,6 @@ public interface IHardwareCapabilitiesFactory
 
     Task<IHardwareCapabilities> GetHardwareCapabilities(
         IFFmpegCapabilities ffmpegCapabilities,
-        string ffmpegPath,
         HardwareAccelerationMode hardwareAccelerationMode,
         Option<string> vaapiDriver,
         Option<string> vaapiDevice);
