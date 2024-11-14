@@ -1,5 +1,7 @@
 using FFPipeline.FFmpeg.Capabilities;
 using ConsoleAppFramework;
+using FFPipeline.FFmpeg;
+using FFPipeline.Models;
 
 namespace FFPipeline.Commands;
 
@@ -21,9 +23,18 @@ public class CapabilitiesCommand
 
             if (json != null && File.Exists(json.FFmpegPath))
             {
-                // TODO: remove memory cache from hardware capabilities factory?
-                var capabilities = await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(json.FFmpegPath);
-                var modelJson = JsonExtensions.Serialize(capabilities.ToModel(), SourceGenerationContext.Default);
+                var ffmpegCapabilities = await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(json.FFmpegPath);
+                var nvidiaCapabilities = await _hardwareCapabilitiesFactory.GetHardwareCapabilities(ffmpegCapabilities,
+                        json.FFmpegPath, HardwareAccelerationMode.Nvenc, Option<string>.None, Option<string>.None)
+                    as NvidiaHardwareCapabilities;
+
+                var model = new CapabilitiesModel
+                {
+                    FFmpeg = ffmpegCapabilities.ToModel(),
+                    Nvidia = nvidiaCapabilities?.ToModel(),
+                };
+
+                var modelJson = JsonExtensions.Serialize(model, SourceGenerationContext.Default);
                 Console.WriteLine(modelJson);
             }
         }

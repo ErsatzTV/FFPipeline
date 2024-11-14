@@ -1,4 +1,5 @@
 using FFPipeline.FFmpeg.Format;
+using FFPipeline.Models;
 using Microsoft.Extensions.Logging;
 
 namespace FFPipeline.FFmpeg.Capabilities;
@@ -109,6 +110,13 @@ public class NvidiaHardwareCapabilities : IHardwareCapabilities
 
     public Option<RateControlMode> GetRateControlMode(string videoFormat, Option<IPixelFormat> maybePixelFormat) =>
         Option<RateControlMode>.None;
+
+    public NvidiaCapabilitiesModel ToModel() =>
+        new()
+        {
+            Architecture = _architecture,
+            Model = _model,
+        };
 
     private FFmpegCapability CheckHardwareCodec(FFmpegKnownDecoder codec, Func<FFmpegKnownDecoder, bool> check)
     {
