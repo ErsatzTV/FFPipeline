@@ -1,5 +1,6 @@
 using ErsatzTV.FFmpeg.Decoder;
 using ErsatzTV.FFmpeg.Format;
+using FFPipeline.Models;
 
 namespace ErsatzTV.FFmpeg.Capabilities;
 
@@ -79,5 +80,15 @@ public class FFmpegCapabilities : IFFmpegCapabilities
             VideoFormat.GeneratedImage => new DecoderImplicit(),
 
             _ => Option<IDecoder>.None
+        };
+
+    public FFmpegCapabilitiesModel ToModel() =>
+        new()
+        {
+            HwAccels = _ffmpegHardwareAccelerations.OrderBy(x => x).ToArray(),
+            Decoders = _ffmpegDecoders.OrderBy(x => x).ToArray(),
+            Filters = _ffmpegFilters.OrderBy(x => x).ToArray(),
+            Encoders = _ffmpegEncoders.OrderBy(x => x).ToArray(),
+            Options = _ffmpegOptions.OrderBy(x => x).ToArray()
         };
 }

@@ -1,4 +1,5 @@
 using ErsatzTV.FFmpeg.Decoder;
+using FFPipeline.Models;
 
 namespace ErsatzTV.FFmpeg.Capabilities;
 
@@ -10,4 +11,5 @@ public interface IFFmpegCapabilities
     bool HasFilter(FFmpegKnownFilter filter);
     bool HasOption(FFmpegKnownOption ffmpegOption);
     Option<IDecoder> SoftwareDecoderForVideoFormat(string videoFormat);
+    FFmpegCapabilitiesModel ToModel();
 }
