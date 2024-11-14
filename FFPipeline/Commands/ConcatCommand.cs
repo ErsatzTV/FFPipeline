@@ -36,7 +36,10 @@ public class ConcatCommand(IPipelineBuilderFactory pipelineBuilderFactory)
             // TODO: saveReports
             var pipeline = pipelineBuilder.Concat(
                 concatInputFile,
-                FFmpegState.Concat(false, request?.Metadata?.ServiceName ?? string.Empty));
+                FFmpegState.Concat(
+                    false,
+                    request.Metadata?.ServiceProvider ?? "FFPipeline",
+                    request.Metadata?.ServiceName ?? string.Empty));
 
             var environmentVariables =
                 CommandGenerator.GenerateEnvironmentVariables(pipeline.PipelineSteps);

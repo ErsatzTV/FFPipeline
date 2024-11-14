@@ -28,6 +28,9 @@ public class ConcatRequestInput
 
 public class ConcatRequestMetadata
 {
+    [JsonPropertyName("serviceProvider")]
+    public string? ServiceProvider { get; set; }
+
     [JsonPropertyName("serviceName")]
     public string? ServiceName { get; set; }
 }

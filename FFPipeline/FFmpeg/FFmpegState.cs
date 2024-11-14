@@ -25,7 +25,7 @@ public record FFmpegState(
 {
     public int QsvExtraHardwareFrames => MaybeQsvExtraHardwareFrames.IfNone(64);
 
-    public static FFmpegState Concat(bool saveReport, string channelName) =>
+    public static FFmpegState Concat(bool saveReport, string serviceProvider, string serviceName) =>
         new(
             saveReport,
             HardwareAccelerationMode.None,
@@ -35,8 +35,8 @@ public record FFmpegState(
             Option<TimeSpan>.None,
             Option<TimeSpan>.None,
             true, // do not map metadata
-            "FFPipeline",
-            channelName,
+            serviceProvider,
+            serviceName,
             Option<string>.None,
             Option<string>.None,
             Option<string>.None,
