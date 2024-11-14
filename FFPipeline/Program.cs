@@ -31,6 +31,7 @@ ConsoleApp.ServiceProvider = serviceProvider;
 var app = ConsoleApp.Create();
 
 app.Add<FFmpegCapabilitiesCommand>();
+app.Add<NvidiaCapabilitiesCommand>();
 
 await app.RunAsync(args);
 

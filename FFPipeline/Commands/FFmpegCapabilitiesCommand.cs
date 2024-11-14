@@ -10,6 +10,25 @@ public class FFmpegCapabilitiesCommand
     public FFmpegCapabilitiesCommand(IHardwareCapabilitiesFactory hardwareCapabilitiesFactory) =>
         _hardwareCapabilitiesFactory = hardwareCapabilitiesFactory;
 
+    protected IHardwareCapabilitiesFactory HardwareCapabilitiesFactory => _hardwareCapabilitiesFactory;
+
+    [Command("ffmpeg-capabilities")]
+    public virtual async Task Run(CancellationToken cancellationToken)
+    {
+        var maybeInput = await GetInput(cancellationToken);
+        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
+        foreach (var ffmpegCapabilities in maybeCapabilities)
+        {
+            var modelJson = JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default);
+            Console.WriteLine(modelJson);
+        }
+
+        if (maybeCapabilities.IsNone)
+        {
+            Console.WriteLine("{}");
+        }
+    }
+
     protected async Task<Option<CapabilitiesInput>> GetInput(CancellationToken cancellationToken)
     {
         if (Console.IsInputRedirected)
@@ -38,22 +57,5 @@ public class FFmpegCapabilitiesCommand
         }
 
         return Option<IFFmpegCapabilities>.None;
-    }
-
-    [Command("ffmpeg-capabilities")]
-    public async Task Run(CancellationToken cancellationToken)
-    {
-        var maybeInput = await GetInput(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
-        foreach (var ffmpegCapabilities in maybeCapabilities)
-        {
-            var modelJson = JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default);
-            Console.WriteLine(modelJson);
-        }
-
-        if (maybeCapabilities.IsNone)
-        {
-            Console.WriteLine("{}");
-        }
     }
 }
