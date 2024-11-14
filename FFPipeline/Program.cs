@@ -30,7 +30,7 @@ ConsoleApp.ServiceProvider = serviceProvider;
 
 var app = ConsoleApp.Create();
 
-app.Add<CapabilitiesCommand>();
+app.Add<FFmpegCapabilitiesCommand>();
 
 await app.RunAsync(args);
 
