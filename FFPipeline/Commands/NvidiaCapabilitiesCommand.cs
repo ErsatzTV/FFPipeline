@@ -12,20 +12,20 @@ public class NvidiaCapabilitiesCommand : FFmpegCapabilitiesCommand
     }
 
     [Command("nvidia-capabilities")]
-    public override async Task Run(CancellationToken cancellationToken)
+    public override async Task Run([JsonValueParserAttribute<CapabilitiesInput>] CapabilitiesInput? input, CancellationToken cancellationToken)
     {
-        var maybeInput = await GetInput(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
-        var maybeNvidiaCapabilities = await GetNvidiaCapabilities(maybeInput, maybeCapabilities);
-        foreach (var nvidiaCapabilities in maybeNvidiaCapabilities)
+        var maybeInput = input ?? await GetInput(cancellationToken);
+        var outJson = maybeInput
+        .MapAsync(maybeInput =>
         {
-            var modelJson = JsonExtensions.Serialize(nvidiaCapabilities.ToModel(), SourceGenerationContext.Default);
-            Console.WriteLine(modelJson);
-        }
+            return GetFFmpegCapabilities(maybeInput, cancellationToken)
+                            .MapAsync(capabilities => GetNvidiaCapabilities(maybeInput, capabilities));
+        })
+        .Map(x => x.Match(nvidiaCapabilities => JsonExtensions.Serialize(nvidiaCapabilities.ToModel(), SourceGenerationContext.Default), "{}"));
 
-        if (maybeCapabilities.IsNone)
+        await foreach (var json in outJson)
         {
-            Console.WriteLine("{}");
+            Console.WriteLine(json);
         }
     }
 

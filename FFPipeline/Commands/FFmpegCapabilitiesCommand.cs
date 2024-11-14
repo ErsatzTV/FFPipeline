@@ -1,6 +1,5 @@
 using FFPipeline.FFmpeg.Capabilities;
 using ConsoleAppFramework;
-
 namespace FFPipeline.Commands;
 
 public class FFmpegCapabilitiesCommand
@@ -13,23 +12,21 @@ public class FFmpegCapabilitiesCommand
     protected IHardwareCapabilitiesFactory HardwareCapabilitiesFactory => _hardwareCapabilitiesFactory;
 
     [Command("ffmpeg-capabilities")]
-    public virtual async Task Run(CancellationToken cancellationToken)
+    public virtual async Task Run([JsonValueParserAttribute<CapabilitiesInput>] CapabilitiesInput? input, CancellationToken cancellationToken)
     {
-        var maybeInput = await GetInput(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
-        foreach (var ffmpegCapabilities in maybeCapabilities)
-        {
-            var modelJson = JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default);
-            Console.WriteLine(modelJson);
-        }
+        var outJson = (input ?? await GetInput(cancellationToken))
+        .MapAsync(maybeInput => GetFFmpegCapabilities(maybeInput, cancellationToken))
+        .ToOption()
+        .Map(flatten)
+        .MapAsync(ffmpegCapabilities => JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default) ?? "{}");
 
-        if (maybeCapabilities.IsNone)
+        await foreach (var json in outJson)
         {
-            Console.WriteLine("{}");
+            Console.WriteLine(json);
         }
     }
 
-    protected async Task<Option<CapabilitiesInput>> GetInput(CancellationToken cancellationToken)
+    protected static async Task<Option<CapabilitiesInput>> GetInput(CancellationToken cancellationToken)
     {
         if (Console.IsInputRedirected)
         {
@@ -45,17 +42,15 @@ public class FFmpegCapabilitiesCommand
     }
 
     protected async Task<Option<IFFmpegCapabilities>> GetFFmpegCapabilities(
-        Option<CapabilitiesInput> maybeInput,
+        CapabilitiesInput input,
         CancellationToken cancellationToken)
     {
-        foreach (var input in maybeInput)
-        {
-            if (!string.IsNullOrEmpty(input.FFmpegPath) && File.Exists(input.FFmpegPath))
-            {
-                return Some(await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(input.FFmpegPath));
-            }
-        }
-
-        return Option<IFFmpegCapabilities>.None;
+        return await Option<CapabilitiesInput>.Some(input)
+        .Map(input => Optional(input.FFmpegPath))
+        .Flatten()
+        .Filter(ffmpegPath => !string.IsNullOrEmpty(ffmpegPath))
+        .Filter(File.Exists)
+        .MapAsync(_hardwareCapabilitiesFactory.GetFFmpegCapabilities)
+        .ToOption();
     }
 }
