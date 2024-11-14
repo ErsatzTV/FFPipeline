@@ -14,9 +14,9 @@ public class NvidiaCapabilitiesCommand : FFmpegCapabilitiesCommand
     [Command("nvidia-capabilities")]
     public override async Task Run(CancellationToken cancellationToken)
     {
-        var maybeInput = await GetInput(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeInput, cancellationToken);
-        var maybeNvidiaCapabilities = await GetNvidiaCapabilities(maybeInput, maybeCapabilities);
+        var maybeRequest = await GetRequest(cancellationToken);
+        var maybeCapabilities = await GetFFmpegCapabilities(maybeRequest);
+        var maybeNvidiaCapabilities = await GetNvidiaCapabilities(maybeRequest, maybeCapabilities);
         foreach (var nvidiaCapabilities in maybeNvidiaCapabilities)
         {
             var modelJson = JsonExtensions.Serialize(nvidiaCapabilities.ToModel(), SourceGenerationContext.Default);
@@ -30,18 +30,18 @@ public class NvidiaCapabilitiesCommand : FFmpegCapabilitiesCommand
     }
 
     private async Task<Option<NvidiaHardwareCapabilities>> GetNvidiaCapabilities(
-        Option<CapabilitiesInput> maybeInput,
+        Option<CapabilitiesRequest> maybeRequest,
         Option<IFFmpegCapabilities> maybeCapabilities)
     {
-        foreach (var input in maybeInput)
+        foreach (var request in maybeRequest)
         {
             foreach (var ffmpegCapabilities in maybeCapabilities)
             {
-                if (!string.IsNullOrEmpty(input.FFmpegPath) && File.Exists(input.FFmpegPath))
+                if (!string.IsNullOrEmpty(request.FFmpegPath) && File.Exists(request.FFmpegPath))
                 {
                     var nvidiaOutput = await HardwareCapabilitiesFactory.GetHardwareCapabilities(
                         ffmpegCapabilities,
-                        input.FFmpegPath,
+                        request.FFmpegPath,
                         HardwareAccelerationMode.Nvenc,
                         Option<string>.None,
                         Option<string>.None) as NvidiaHardwareCapabilities;
