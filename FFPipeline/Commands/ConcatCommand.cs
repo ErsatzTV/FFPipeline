@@ -1,34 +1,26 @@
 using ConsoleAppFramework;
 using FFPipeline.FFmpeg;
-using FFPipeline.FFmpeg.Environment;
 using FFPipeline.FFmpeg.Pipeline;
 using FFPipeline.Models;
 
 namespace FFPipeline.Commands;
 
-public class ConcatCommand
+public class ConcatCommand(IPipelineBuilderFactory pipelineBuilderFactory)
 {
-    private readonly IPipelineBuilderFactory _pipelineBuilderFactory;
-
-    public ConcatCommand(IPipelineBuilderFactory pipelineBuilderFactory)
-    {
-        _pipelineBuilderFactory = pipelineBuilderFactory;
-    }
-
     [Command("concat")]
     public async Task Run(CancellationToken cancellationToken)
     {
         var maybeRequest = await GetRequest(cancellationToken);
         foreach (var request in maybeRequest)
         {
-            if (request?.Input?.Url is null || request.FFmpegPath is null)
+            if (request.Input?.Url is null || request.FFmpegPath is null)
             {
                 break;
             }
 
             var resolution = new FrameSize(request.Input.Width, request.Input.Height);
             var concatInputFile = new ConcatInputFile(request.Input.Url, resolution);
-            var pipelineBuilder = await _pipelineBuilderFactory.GetBuilder(
+            var pipelineBuilder = await pipelineBuilderFactory.GetBuilder(
                 HardwareAccelerationMode.None,
                 Option<VideoInputFile>.None,
                 Option<AudioInputFile>.None,
@@ -42,14 +34,14 @@ public class ConcatCommand
                 request.FFmpegPath);
 
             // TODO: saveReports
-            FFmpegPipeline pipeline = pipelineBuilder.Concat(
+            var pipeline = pipelineBuilder.Concat(
                 concatInputFile,
                 FFmpegState.Concat(false, request?.Metadata?.ServiceName ?? string.Empty));
 
-            IList<EnvironmentVariable> environmentVariables =
+            var environmentVariables =
                 CommandGenerator.GenerateEnvironmentVariables(pipeline.PipelineSteps);
 
-            IList<string> arguments = CommandGenerator.GenerateArguments(
+            var arguments = CommandGenerator.GenerateArguments(
                 Option<VideoInputFile>.None,
                 Option<AudioInputFile>.None,
                 Option<WatermarkInputFile>.None,
@@ -63,9 +55,9 @@ public class ConcatCommand
                 {
                     Key = ev.Key,
                     Value = ev.Value
-                }).ToArray(),
+                }),
 
-                Arguments = arguments.ToArray(),
+                Arguments = arguments
             };
 
             Console.WriteLine(JsonExtensions.Serialize(model, SourceGenerationContext.Default));
@@ -77,7 +69,7 @@ public class ConcatCommand
         }
     }
 
-    private async Task<Option<ConcatRequest>> GetRequest(CancellationToken cancellationToken)
+    private static async Task<Option<ConcatRequest>> GetRequest(CancellationToken cancellationToken)
     {
         if (Console.IsInputRedirected)
         {

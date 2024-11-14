@@ -8,10 +8,10 @@ public class ConcatRequest
     public string? FFmpegPath { get; set; }
 
     [JsonPropertyName("input")]
-    public ConcatRequestInput Input { get; set; }
+    public ConcatRequestInput? Input { get; set; }
 
     [JsonPropertyName("metadata")]
-    public ConcatRequestMetadata Metadata { get; set; }
+    public ConcatRequestMetadata? Metadata { get; set; }
 }
 
 public class ConcatRequestInput

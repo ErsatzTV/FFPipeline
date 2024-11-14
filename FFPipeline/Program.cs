@@ -40,10 +40,7 @@ app.Add<ConcatCommand>();
 
 await app.RunAsync(args);
 
-[JsonSourceGenerationOptions(
-    WriteIndented = true,
-    PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower,
-    PropertyNameCaseInsensitive = true)]
+[JsonSourceGenerationOptions(WriteIndented = true, PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
 [JsonSerializable(typeof(CapabilitiesRequest))]
 [JsonSerializable(typeof(ConcatRequest))]
 [JsonSerializable(typeof(FFmpegCapabilitiesModel))]

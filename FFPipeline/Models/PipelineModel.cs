@@ -5,10 +5,10 @@ namespace FFPipeline.Models;
 public class PipelineModel
 {
     [JsonPropertyName("environment")]
-    public PipelineEnvironmentModel[] Environment { get; set; } = [];
+    public IEnumerable<PipelineEnvironmentModel> Environment { get; set; } = [];
 
     [JsonPropertyName("arguments")]
-    public string[] Arguments { get; set; } = [];
+    public IEnumerable<string> Arguments { get; set; } = [];
 }
 
 public class PipelineEnvironmentModel
