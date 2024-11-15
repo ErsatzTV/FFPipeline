@@ -13,18 +13,23 @@ public class FFmpegCapabilities : IFFmpegCapabilities
     private readonly IReadOnlySet<string> _ffmpegOptions;
 
     public FFmpegCapabilities(
+        string ffmpegPath,
         IReadOnlySet<string> ffmpegHardwareAccelerations,
         IReadOnlySet<string> ffmpegDecoders,
         IReadOnlySet<string> ffmpegFilters,
         IReadOnlySet<string> ffmpegEncoders,
         IReadOnlySet<string> ffmpegOptions)
     {
+        FFmpegPath = ffmpegPath;
+
         _ffmpegHardwareAccelerations = ffmpegHardwareAccelerations;
         _ffmpegDecoders = ffmpegDecoders;
         _ffmpegFilters = ffmpegFilters;
         _ffmpegEncoders = ffmpegEncoders;
         _ffmpegOptions = ffmpegOptions;
     }
+
+    public string FFmpegPath { get; }
 
     public bool HasHardwareAcceleration(HardwareAccelerationMode hardwareAccelerationMode)
     {

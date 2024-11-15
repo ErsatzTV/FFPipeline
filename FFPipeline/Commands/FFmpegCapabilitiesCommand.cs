@@ -3,58 +3,44 @@ using ConsoleAppFramework;
 
 namespace FFPipeline.Commands;
 
-public class FFmpegCapabilitiesCommand
+public class FFmpegCapabilitiesCommand(IHardwareCapabilitiesFactory hardwareCapabilitiesFactory)
 {
-    private readonly IHardwareCapabilitiesFactory _hardwareCapabilitiesFactory;
-
-    public FFmpegCapabilitiesCommand(IHardwareCapabilitiesFactory hardwareCapabilitiesFactory) =>
-        _hardwareCapabilitiesFactory = hardwareCapabilitiesFactory;
-
-    protected IHardwareCapabilitiesFactory HardwareCapabilitiesFactory => _hardwareCapabilitiesFactory;
+    protected IHardwareCapabilitiesFactory HardwareCapabilitiesFactory => hardwareCapabilitiesFactory;
 
     [Command("ffmpeg-capabilities")]
-    public virtual async Task Run(CancellationToken cancellationToken)
+    public virtual async Task Run([JsonValueParserAttribute<CapabilitiesRequest>] CapabilitiesRequest? input = null,
+        CancellationToken cancellationToken = default)
     {
-        var maybeRequest = await GetRequest(cancellationToken);
-        var maybeCapabilities = await GetFFmpegCapabilities(maybeRequest);
-        foreach (var ffmpegCapabilities in maybeCapabilities)
-        {
-            var modelJson = JsonExtensions.Serialize(ffmpegCapabilities.ToModel(), SourceGenerationContext.Default);
-            Console.WriteLine(modelJson);
-        }
+        var outJson = await (input ?? await GetRequest(cancellationToken))
+            .MapAsync(GetFFmpegCapabilities)
+            .ToOption()
+            .Map(flatten)
+            .MapAsync(capabilities => JsonExtensions.Serialize(capabilities.ToModel(), SourceGenerationContext.Default))
+            .ToOption()
+            .IfNoneAsync("{}");
 
-        if (maybeCapabilities.IsNone)
-        {
-            Console.WriteLine("{}");
-        }
+        Console.WriteLine(outJson);
     }
 
-    protected async Task<Option<CapabilitiesRequest>> GetRequest(CancellationToken cancellationToken)
+    protected static async Task<Option<CapabilitiesRequest>> GetRequest(CancellationToken cancellationToken)
     {
         if (Console.IsInputRedirected)
         {
             var json = await Console.In.ReadToEndAsync(cancellationToken);
-            var capabilitiesRequest = JsonExtensions.Deserialize<CapabilitiesRequest>(json, SourceGenerationContext.Default);
-            if (capabilitiesRequest != null)
-            {
-                return capabilitiesRequest;
-            }
+            return Optional(JsonExtensions.Deserialize<CapabilitiesRequest>(json, SourceGenerationContext.Default));
         }
 
         return Option<CapabilitiesRequest>.None;
     }
 
-    protected async Task<Option<IFFmpegCapabilities>> GetFFmpegCapabilities(
-        Option<CapabilitiesRequest> maybeRequest)
+    protected async Task<Option<IFFmpegCapabilities>> GetFFmpegCapabilities(CapabilitiesRequest request)
     {
-        foreach (var request in maybeRequest)
-        {
-            if (!string.IsNullOrEmpty(request.FFmpegPath) && File.Exists(request.FFmpegPath))
-            {
-                return Some(await _hardwareCapabilitiesFactory.GetFFmpegCapabilities(request.FFmpegPath));
-            }
-        }
-
-        return Option<IFFmpegCapabilities>.None;
+        return await Some(request)
+            .Map(input => Optional(input.FFmpegPath))
+            .Flatten()
+            .Filter(ffmpegPath => !string.IsNullOrEmpty(ffmpegPath))
+            .Filter(File.Exists)
+            .MapAsync(hardwareCapabilitiesFactory.GetFFmpegCapabilities)
+            .ToOption();
     }
 }
