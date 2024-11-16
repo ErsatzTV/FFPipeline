@@ -21,6 +21,9 @@ jobs:
 
       - name: Build
         run: dotnet publish
+
+      - name: Check Executable
+        run: .\FFPipeline\FFPipeline\bin\Release\net9.0\win-x64\publish\FFPipeline.exe
   build_and_test_linux:
     runs-on: ubuntu-latest
     steps:
@@ -40,6 +43,9 @@ jobs:
 
       - name: Build
         run: dotnet publish
+
+      - name: Check Executable
+        run: ./FFPipeline/FFPipeline/bin/Release/net9.0/linux-x64/publish/FFPipeline
   build_and_test_mac:
     runs-on: macos-12
     steps:
@@ -62,3 +68,6 @@ jobs:
 
       - name: Build
         run: dotnet publish
+
+      - name: Check Executable
+        run: ./FFPipeline/FFPipeline/bin/Release/net9.0/osx-x64/publish/FFPipeline
