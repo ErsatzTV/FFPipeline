@@ -20,10 +20,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet publish
+        run: dotnet publish -o publish
 
       - name: Check Executable
-        run: .\FFPipeline\FFPipeline\bin\Release\net9.0\win-x64\publish\FFPipeline.exe
+        run: .\publish\FFPipeline.exe
   build_and_test_linux:
     runs-on: ubuntu-latest
     steps:
@@ -42,10 +42,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet publish
+        run: dotnet publish -o publish
 
       - name: Check Executable
-        run: ./FFPipeline/FFPipeline/bin/Release/net9.0/linux-x64/publish/FFPipeline
+        run: ./publish/FFPipeline
   build_and_test_mac:
     runs-on: macos-12
     steps:
@@ -67,7 +67,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet publish
+        run: dotnet publish -o publish
 
       - name: Check Executable
-        run: ./FFPipeline/FFPipeline/bin/Release/net9.0/osx-x64/publish/FFPipeline
+        run: ./publish/FFPipeline
