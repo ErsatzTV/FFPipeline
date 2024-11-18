@@ -33,10 +33,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-12
+          - os: macos-13
             kind: macOS
             target: osx-x64
-          - os: macos-12
+          - os: macos-13
             kind: macOS
             target: osx-arm64
     steps:
@@ -76,7 +76,7 @@ jobs:
           dotnet publish -o "${{ env.RELEASE_NAME }}"
 
           # Pack files
-          tar czvf "${release_name}.tar.gz" "${{ env.RELEASE_NAME }}"
+          tar czvf "${{ env.RELEASE_NAME }}.tar.gz" "${{ env.RELEASE_NAME }}"
 
           # Delete output directory
           rm -r "${{ env.RELEASE_NAME }}"
@@ -160,9 +160,9 @@ jobs:
 
           # Pack files
           if [ "${{ matrix.kind }}" == "windows" ]; then
-            7z a -tzip "${release_name}.zip" "./${release_name}/*"
+            7z a -tzip "${{ env.RELEASE_NAME }}.zip" "./${{ env.RELEASE_NAME }}/*"
           else
-            tar czvf "${release_name}.tar.gz" "${{ env.RELEASE_NAME }}"
+            tar czvf "${{ env.RELEASE_NAME }}.tar.gz" "${{ env.RELEASE_NAME }}"
           fi
 
           # Delete output directory
