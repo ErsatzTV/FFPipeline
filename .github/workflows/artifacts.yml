@@ -146,6 +146,12 @@ jobs:
       - name: Install dependencies
         run: dotnet restore -r "${{ matrix.target }}"
 
+      - name: Calculate Release Name
+        shell: bash
+        run: |
+          release_name="ErsatzTV-${{ inputs.release_version }}-${{ matrix.target }}"
+          echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
+
       - name: Build
         shell: bash
         run: |
