@@ -1,0 +1,191 @@
+name: Build Artifacts
+on:
+  workflow_call:
+    inputs:
+      release_tag:
+        description: 'Release tag'
+        required: true
+        type: string
+      release_version:
+        description: 'Release version number (e.g. v0.3.7-alpha)'
+        required: true
+        type: string
+#      info_version:
+#        description: 'Informational version number (e.g. 0.3.7-alpha)'
+#        required: true
+#        type: string
+    secrets:
+#      apple_developer_certificate_p12_base64:
+#        required: true
+#      apple_developer_certificate_password:
+#        required: true
+#      ac_username:
+#        required: true
+#      ac_password:
+#        required: true
+      gh_token:
+        required: true
+jobs:
+  build_and_upload_mac:
+    name: Mac Build & Upload
+    runs-on: ${{ matrix.os }}
+    if: contains(github.event.head_commit.message, '[no build]') == false
+    strategy:
+      matrix:
+        include:
+          - os: macos-13
+            kind: macOS
+            target: osx-x64
+          - os: macos-13
+            kind: macOS
+            target: osx-arm64
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Clean
+        run: dotnet clean --configuration Release && dotnet nuget locals all --clear
+
+      - name: Install dependencies
+        run: dotnet restore -r "${{ matrix.target}}"
+
+#      - name: Import Code-Signing Certificates
+#        uses: Apple-Actions/import-codesign-certs@v2
+#        with:
+#          p12-file-base64: ${{ secrets.apple_developer_certificate_p12_base64 }}
+#          p12-password: ${{ secrets.apple_developer_certificate_password }}
+
+      - name: Calculate Release Name
+        shell: bash
+        run: |
+          release_name="FFPipeline-${{ inputs.release_version }}-${{ matrix.target }}"
+          echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
+
+      - name: Build
+        shell: bash
+        run: |
+          mkdir "${{ env.RELEASE_NAME }}"
+          dotnet publish -o "${{ env.RELEASE_NAME }}"
+
+          # Pack files
+          tar czvf "${{ env.RELEASE_NAME }}.tar.gz" "${{ env.RELEASE_NAME }}"
+
+          # Delete output directory
+          rm -r "${{ env.RELEASE_NAME }}"
+
+#      - name: Sign
+#        shell: bash
+#        run: scripts/macOS/sign.sh
+
+#      - name: Notarize
+#        shell: bash
+#        run: |
+#          xcrun notarytool submit ErsatzTV.dmg --apple-id "${{ secrets.ac_username }}" --password "${{ secrets.ac_password }}" --team-id 32MB98Q32R --wait
+#          xcrun stapler staple ErsatzTV.dmg
+
+      - name: Delete old release assets
+        uses: mknejp/delete-release-assets@v1
+        if: ${{ inputs.release_tag == 'develop' }}
+        with:
+          token: ${{ secrets.gh_token }}
+          tag: ${{ inputs.release_tag }}
+          fail-if-no-assets: false
+          assets: |
+            *${{ matrix.target }}.tar.gz
+
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: ${{ inputs.release_tag }}
+          files: |
+            ${{ env.RELEASE_NAME }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.gh_token }}
+  build_and_upload:
+    name: Build & Upload
+    runs-on: ${{ matrix.os }}
+    if: contains(github.event.head_commit.message, '[no build]') == false
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            kind: linux
+            target: linux-x64
+          - os: ubuntu-latest
+            kind: linux
+            target: linux-arm
+          - os: ubuntu-latest
+            kind: linux
+            target: linux-arm64
+          - os: windows-latest
+            kind: windows
+            target: win-x64
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Clean
+        run: dotnet clean --configuration Release && dotnet nuget locals all --clear
+
+      - name: Install dependencies
+        run: dotnet restore -r "${{ matrix.target }}"
+
+      - name: Calculate Release Name
+        shell: bash
+        run: |
+          release_name="FFPipeline-${{ inputs.release_version }}-${{ matrix.target }}"
+          echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
+
+      - name: Build
+        shell: bash
+        run: |
+          mkdir "${{ env.RELEASE_NAME }}"
+          dotnet publish -o "${{ env.RELEASE_NAME }}"
+
+          # Pack files
+          if [ "${{ matrix.kind }}" == "windows" ]; then
+            7z a -tzip "${{ env.RELEASE_NAME }}.zip" "./${{ env.RELEASE_NAME }}/*"
+          else
+            tar czvf "${{ env.RELEASE_NAME }}.tar.gz" "${{ env.RELEASE_NAME }}"
+          fi
+
+          # Delete output directory
+          rm -r "${{ env.RELEASE_NAME }}"
+
+      - name: Delete old release assets
+        uses: mknejp/delete-release-assets@v1
+        if: ${{ inputs.release_tag == 'develop' }}
+        with:
+          token: ${{ secrets.gh_token }}
+          tag: ${{ inputs.release_tag }}
+          fail-if-no-assets: false
+          assets: |
+            *${{ matrix.target }}.zip
+            *${{ matrix.target }}.tar.gz
+
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: ${{ inputs.release_tag }}
+          files: |
+            ${{ env.RELEASE_NAME }}.zip
+            ${{ env.RELEASE_NAME }}.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.gh_token }}
