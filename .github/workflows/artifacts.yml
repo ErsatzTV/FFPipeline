@@ -66,20 +66,20 @@ jobs:
       - name: Calculate Release Name
         shell: bash
         run: |
-          release_name="ErsatzTV-${{ inputs.release_version }}-${{ matrix.target }}"
+          release_name="FFPipeline-${{ inputs.release_version }}-${{ matrix.target }}"
           echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
 
       - name: Build
         shell: bash
         run: |
-          mkdir "$release_name"
-          dotnet publish -o "$release_name"
+          mkdir "${{ env.RELEASE_NAME }}"
+          dotnet publish -o "${{ env.RELEASE_NAME }}"
 
           # Pack files
-          tar czvf "${release_name}.tar.gz" "$release_name"
+          tar czvf "${release_name}.tar.gz" "${{ env.RELEASE_NAME }}"
 
           # Delete output directory
-          rm -r "$release_name"
+          rm -r "${{ env.RELEASE_NAME }}"
 
 #      - name: Sign
 #        shell: bash
@@ -149,24 +149,24 @@ jobs:
       - name: Calculate Release Name
         shell: bash
         run: |
-          release_name="ErsatzTV-${{ inputs.release_version }}-${{ matrix.target }}"
+          release_name="FFPipeline-${{ inputs.release_version }}-${{ matrix.target }}"
           echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
 
       - name: Build
         shell: bash
         run: |
-          mkdir "$release_name"
-          dotnet publish -o "$release_name"
+          mkdir "${{ env.RELEASE_NAME }}"
+          dotnet publish -o "${{ env.RELEASE_NAME }}"
 
           # Pack files
           if [ "${{ matrix.kind }}" == "windows" ]; then
             7z a -tzip "${release_name}.zip" "./${release_name}/*"
           else
-            tar czvf "${release_name}.tar.gz" "$release_name"
+            tar czvf "${release_name}.tar.gz" "${{ env.RELEASE_NAME }}"
           fi
 
           # Delete output directory
-          rm -r "$release_name"
+          rm -r "${{ env.RELEASE_NAME }}"
 
       - name: Delete old release assets
         uses: mknejp/delete-release-assets@v1
