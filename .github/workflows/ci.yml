@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - mac-signing
+      - main
 jobs:
   calculate_version:
     name: Calculate version information
@@ -26,7 +26,7 @@ jobs:
       artifacts_version: ${{ env.ARTIFACTS_VERSION }}
       info_version: ${{ env.INFO_VERSION }}
   build_and_upload:
-    uses: ErsatzTV/FFPipeline/.github/workflows/artifacts.yml@mac-signing
+    uses: ErsatzTV/FFPipeline/.github/workflows/artifacts.yml@main
     needs: calculate_version
     with:
       release_tag: develop
