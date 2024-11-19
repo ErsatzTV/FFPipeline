@@ -75,15 +75,14 @@ jobs:
           mkdir "${{ env.RELEASE_NAME }}"
           dotnet publish -o "${{ env.RELEASE_NAME }}"
 
+          # sign
+          ./scripts/macOS/sign.sh "${{ env.RELEASE_NAME }}/FFPipeline"
+
           # Pack files
           7z a -tzip "${{ env.RELEASE_NAME }}.zip" "./${{ env.RELEASE_NAME }}/*"
 
           # Delete output directory
           rm -r "${{ env.RELEASE_NAME }}"
-
-      - name: Sign
-        shell: bash
-        run: scripts/macOS/sign.sh "${{ env.RELEASE_NAME }}.zip"
 
       - name: Notarize
         shell: bash
