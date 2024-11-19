@@ -15,14 +15,14 @@ on:
 #        required: true
 #        type: string
     secrets:
-#      apple_developer_certificate_p12_base64:
-#        required: true
-#      apple_developer_certificate_password:
-#        required: true
-#      ac_username:
-#        required: true
-#      ac_password:
-#        required: true
+      apple_developer_certificate_p12_base64:
+        required: true
+      apple_developer_certificate_password:
+        required: true
+      ac_username:
+        required: true
+      ac_password:
+        required: true
       gh_token:
         required: true
 jobs:
@@ -57,11 +57,11 @@ jobs:
       - name: Install dependencies
         run: dotnet restore -r "${{ matrix.target}}"
 
-#      - name: Import Code-Signing Certificates
-#        uses: Apple-Actions/import-codesign-certs@v2
-#        with:
-#          p12-file-base64: ${{ secrets.apple_developer_certificate_p12_base64 }}
-#          p12-password: ${{ secrets.apple_developer_certificate_password }}
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.apple_developer_certificate_p12_base64 }}
+          p12-password: ${{ secrets.apple_developer_certificate_password }}
 
       - name: Calculate Release Name
         shell: bash
@@ -75,21 +75,19 @@ jobs:
           mkdir "${{ env.RELEASE_NAME }}"
           dotnet publish -o "${{ env.RELEASE_NAME }}"
 
+          # sign
+          ./scripts/macOS/sign.sh "${{ env.RELEASE_NAME }}/FFPipeline"
+
           # Pack files
-          tar czvf "${{ env.RELEASE_NAME }}.tar.gz" "${{ env.RELEASE_NAME }}"
+          7z a -tzip "${{ env.RELEASE_NAME }}.zip" "./${{ env.RELEASE_NAME }}/*"
 
           # Delete output directory
           rm -r "${{ env.RELEASE_NAME }}"
 
-#      - name: Sign
-#        shell: bash
-#        run: scripts/macOS/sign.sh
-
-#      - name: Notarize
-#        shell: bash
-#        run: |
-#          xcrun notarytool submit ErsatzTV.dmg --apple-id "${{ secrets.ac_username }}" --password "${{ secrets.ac_password }}" --team-id 32MB98Q32R --wait
-#          xcrun stapler staple ErsatzTV.dmg
+      - name: Notarize
+        shell: bash
+        run: |
+          xcrun notarytool submit "${{ env.RELEASE_NAME }}.zip" --apple-id "${{ secrets.ac_username }}" --password "${{ secrets.ac_password }}" --team-id 32MB98Q32R --wait
 
       - name: Delete old release assets
         uses: mknejp/delete-release-assets@v1
@@ -99,7 +97,7 @@ jobs:
           tag: ${{ inputs.release_tag }}
           fail-if-no-assets: false
           assets: |
-            *${{ matrix.target }}.tar.gz
+            *${{ matrix.target }}.zip
 
       - name: Publish
         uses: softprops/action-gh-release@v1
@@ -107,7 +105,7 @@ jobs:
           prerelease: true
           tag_name: ${{ inputs.release_tag }}
           files: |
-            ${{ env.RELEASE_NAME }}.tar.gz
+            ${{ env.RELEASE_NAME }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.gh_token }}
   build_and_upload:
