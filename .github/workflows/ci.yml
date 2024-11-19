@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - mac-signing
 jobs:
   calculate_version:
     name: Calculate version information
@@ -26,15 +26,15 @@ jobs:
       artifacts_version: ${{ env.ARTIFACTS_VERSION }}
       info_version: ${{ env.INFO_VERSION }}
   build_and_upload:
-    uses: ErsatzTV/FFPipeline/.github/workflows/artifacts.yml@main
+    uses: ErsatzTV/FFPipeline/.github/workflows/artifacts.yml@mac-signing
     needs: calculate_version
     with:
       release_tag: develop
       release_version: ${{ needs.calculate_version.outputs.artifacts_version }}
       #info_version: ${{ needs.calculate_version.outputs.info_version }}
     secrets:
-#      apple_developer_certificate_p12_base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
-#      apple_developer_certificate_password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
-#      ac_username: ${{ secrets.AC_USERNAME }}
-#      ac_password: ${{ secrets.AC_PASSWORD }}
+      apple_developer_certificate_p12_base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
+      apple_developer_certificate_password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
+      ac_username: ${{ secrets.AC_USERNAME }}
+      ac_password: ${{ secrets.AC_PASSWORD }}
       gh_token: ${{ secrets.GITHUB_TOKEN }}

@@ -15,14 +15,14 @@ on:
 #        required: true
 #        type: string
     secrets:
-#      apple_developer_certificate_p12_base64:
-#        required: true
-#      apple_developer_certificate_password:
-#        required: true
-#      ac_username:
-#        required: true
-#      ac_password:
-#        required: true
+      apple_developer_certificate_p12_base64:
+        required: true
+      apple_developer_certificate_password:
+        required: true
+      ac_username:
+        required: true
+      ac_password:
+        required: true
       gh_token:
         required: true
 jobs:
@@ -57,11 +57,11 @@ jobs:
       - name: Install dependencies
         run: dotnet restore -r "${{ matrix.target}}"
 
-#      - name: Import Code-Signing Certificates
-#        uses: Apple-Actions/import-codesign-certs@v2
-#        with:
-#          p12-file-base64: ${{ secrets.apple_developer_certificate_p12_base64 }}
-#          p12-password: ${{ secrets.apple_developer_certificate_password }}
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.apple_developer_certificate_p12_base64 }}
+          p12-password: ${{ secrets.apple_developer_certificate_password }}
 
       - name: Calculate Release Name
         shell: bash
@@ -81,15 +81,14 @@ jobs:
           # Delete output directory
           rm -r "${{ env.RELEASE_NAME }}"
 
-#      - name: Sign
-#        shell: bash
-#        run: scripts/macOS/sign.sh
+      - name: Sign
+        shell: bash
+        run: scripts/macOS/sign.sh "${{ env.RELEASE_NAME }}.tar.gz"
 
-#      - name: Notarize
-#        shell: bash
-#        run: |
-#          xcrun notarytool submit ErsatzTV.dmg --apple-id "${{ secrets.ac_username }}" --password "${{ secrets.ac_password }}" --team-id 32MB98Q32R --wait
-#          xcrun stapler staple ErsatzTV.dmg
+      - name: Notarize
+        shell: bash
+        run: |
+          xcrun notarytool submit "${{ env.RELEASE_NAME }}.tar.gz" --apple-id "${{ secrets.ac_username }}" --password "${{ secrets.ac_password }}" --team-id 32MB98Q32R --wait
 
       - name: Delete old release assets
         uses: mknejp/delete-release-assets@v1
